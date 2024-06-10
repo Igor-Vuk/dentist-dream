@@ -1,0 +1,6 @@
+.vscode/*
+!.vscode/extensions.json
+public/.DS_Store/
+node_modules/
+dist/
+stats.html

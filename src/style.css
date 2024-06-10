@@ -1,0 +1,17 @@
+html,
+body,
+#root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* leva */
+.leva-c-TldsY {
+  justify-content: end;
+}
+:root {
+  --leva-sizes-rootWidth: 350px !important;
+}
