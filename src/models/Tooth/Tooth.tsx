@@ -13,6 +13,18 @@ const Tooth: FC<AssetProps> = ({ model }) => {
   const uniformsRef = useRef({
     uTime: { value: 0 },
   })
+  // update Three js shader to color faces back side faces
+  const patchMap = {
+    // we can pick any name
+    csm_Slice: {
+      // name of property inside of THREE.js that we want to replace and what we are replacing it with
+      "#include <colorspace_fragment>": `
+      #include <colorspace_fragment>
+      if(!gl_FrontFacing) 
+      gl_FragColor = vec4(0.75, 0.15, 0.3, 1.0);
+      `,
+    },
+  }
 
   const [hideTooth, setHideTooth] = useState(false)
 
@@ -81,20 +93,39 @@ const Tooth: FC<AssetProps> = ({ model }) => {
           receiveShadow: true,
           geometry: mesh.geometry,
         }
+
         if (mesh.userData.back) {
           return (
-            <mesh {...defaultProperties} key={mesh.uuid}>
-              <meshStandardMaterial />
-            </mesh>
+            <mesh
+              {...defaultProperties}
+              key={mesh.uuid}
+              material={mesh.material}
+            />
           )
         } else {
           return (
             <mesh {...defaultProperties} key={mesh.uuid}>
               <CustomShaderMaterial
-                baseMaterial={THREE.MeshStandardMaterial}
+                attach="customDepthMaterial" // attach it to the `customDepthMaterial` property of the parent `mesh` component.
+                baseMaterial={THREE.MeshDepthMaterial}
                 vertexShader={toothVertexShader}
                 fragmentShader={toothFragmentShader}
                 uniforms={uniformsRef.current}
+                patchMap={patchMap}
+                silent={true}
+                depthPacking={THREE.RGBADepthPacking}
+              />
+              <CustomShaderMaterial
+                attach="material" // attach it to the `material` property of the parent `mesh` component.
+                baseMaterial={
+                  Array.isArray(mesh.material)
+                    ? mesh.material[0]
+                    : mesh.material
+                }
+                vertexShader={toothVertexShader}
+                fragmentShader={toothFragmentShader}
+                uniforms={uniformsRef.current}
+                patchMap={patchMap}
                 silent={true}
                 side={THREE.DoubleSide}
               />
@@ -102,12 +133,28 @@ const Tooth: FC<AssetProps> = ({ model }) => {
           )
         }
       }
+      return null
     })
+  }
+
+  const renderPlane = () => {
+    return (
+      <mesh
+        position={[7, 0, -7]}
+        rotation={[0, -0.6, 0]}
+        receiveShadow={true}
+        castShadow={true}
+      >
+        <planeGeometry args={[40, 40]} />
+        <meshStandardMaterial />
+      </mesh>
+    )
   }
 
   return (
     <>
       {renderModel()}
+      {renderPlane()}
       <Camera ref={cameraRef} />
     </>
   )

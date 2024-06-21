@@ -199,7 +199,7 @@ const DirectionalLightControl = (
     position: {
       x: -48,
       y: 48,
-      z: -25,
+      z: 34,
     },
     color: "#ffffff",
   }
@@ -258,14 +258,14 @@ const ShadowCameraControl = (
 ): LevaTypes.ShadowCameraControlType => {
   const defaultValues: LevaTypes.ShadowCameraControlDefaultValues = {
     helper: false,
-    near: 39,
-    far: 85.8,
-    top: 12,
-    bottom: -25,
-    left: -7.3,
-    right: 20.6,
-    quality: 1024,
-    bias: 0,
+    near: 50,
+    far: 95,
+    top: 20,
+    bottom: -8,
+    left: -24,
+    right: 14,
+    quality: 2048,
+    bias: -0.002,
     normalBias: 0,
   }
 
