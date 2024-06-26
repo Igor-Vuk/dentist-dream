@@ -11,5 +11,21 @@ export type CurvePoints = {
     y: number
     z: number
   }[]
-  closed: boolean
 }
+
+export type CatmullRomCurve3 = {
+  curvePoints: CurvePoints
+  curveClosed?: boolean
+  curveType?: "centripetal" | "chordal" | "catmullrom"
+  curveTension?: number
+}
+
+export type TubeGeometry = {
+  tubeTubularSegments?: number
+  tubeRadius?: number
+  tubeRadialSegments?: number
+  tubeClosed?: boolean
+  tubeColor?: number
+}
+
+export type CurveProps = CatmullRomCurve3 & TubeGeometry

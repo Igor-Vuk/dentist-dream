@@ -4,6 +4,7 @@ import { useFrame } from "@react-three/fiber"
 import Camera from "../../scene/Camera"
 import CustomShaderMaterial from "three-custom-shader-material"
 import { AssetProps } from "../models.types"
+import Explanation from "./Explanation"
 
 import toothVertexShader from "../../shaders/tooth/vertex.vs.glsl"
 import toothFragmentShader from "../../shaders/tooth/fragment.fs.glsl"
@@ -155,6 +156,7 @@ const Tooth: FC<AssetProps> = ({ model }) => {
     <>
       {renderModel()}
       {renderPlane()}
+      {hideTooth && <Explanation />}
       <Camera ref={cameraRef} />
     </>
   )

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-import loadCurveFromJSON from "../helpers/curveMethods.js"
-import { CurvePath, CurvePoints } from "./customHooks.types.js"
+import loadCurveFromJSON from "../helpers/catmullRomCurve.js"
+import { CurvePath, CurveProps } from "./customHooks.types.js"
 
 const useJsonCurve = (
-  curvePoints: CurvePoints,
+  curveProps: CurveProps,
 ): { curvePath: CurvePath | null } => {
   const [curvePath, setCurvePath] = useState<CurvePath | null>(null)
 
@@ -11,7 +11,7 @@ const useJsonCurve = (
     const loadCurve = async () => {
       try {
         /* wait for the curve to be generated before animating in useFrame */
-        const curve = await loadCurveFromJSON(curvePoints)
+        const curve = await loadCurveFromJSON(curveProps)
 
         setCurvePath(curve)
       } catch (error) {
@@ -19,7 +19,7 @@ const useJsonCurve = (
       }
     }
     loadCurve()
-  }, [curvePoints])
+  }, [curveProps])
 
   return { curvePath }
 }
