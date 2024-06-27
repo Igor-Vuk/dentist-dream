@@ -5,3 +5,7 @@ export type AssetProps = {
   model: GLTF
   /* textures: Record<string, THREE.Texture> */
 }
+
+export type ExplanationProps = {
+  hideTooth: boolean
+}

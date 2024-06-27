@@ -21,7 +21,7 @@ const Tooth: FC<AssetProps> = ({ model }) => {
       // name of property inside of THREE.js that we want to replace and what we are replacing it with
       "#include <colorspace_fragment>": `
       #include <colorspace_fragment>
-      if(!gl_FrontFacing) 
+      if(!gl_FrontFacing)
       gl_FragColor = vec4(0.75, 0.15, 0.3, 1.0);
       `,
     },
@@ -156,7 +156,7 @@ const Tooth: FC<AssetProps> = ({ model }) => {
     <>
       {renderModel()}
       {renderPlane()}
-      {hideTooth && <Explanation />}
+      <Explanation hideTooth={hideTooth} />
       <Camera ref={cameraRef} />
     </>
   )
