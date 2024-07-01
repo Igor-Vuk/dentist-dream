@@ -175,7 +175,7 @@ const Tooth: FC<AssetProps> = ({ model }) => {
             mesh.name === hoveredBackMeshName &&
             originalMaterial instanceof THREE.MeshStandardMaterial
           ) {
-            originalMaterial.color.set(0xff0000) // Apply a red tint
+            originalMaterial.color.set(0xff8080) // Apply a red tint
           }
 
           return (
@@ -211,7 +211,10 @@ const Tooth: FC<AssetProps> = ({ model }) => {
       {renderFrontModel}
 
       {renderPlane()}
-      <Explanation hideTooth={hideTooth} />
+      <Explanation
+        hideTooth={hideTooth}
+        hoveredBackMeshName={hoveredBackMeshName}
+      />
       <Camera ref={cameraRef} />
     </>
   )

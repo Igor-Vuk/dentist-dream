@@ -8,4 +8,5 @@ export type AssetProps = {
 
 export type ExplanationProps = {
   hideTooth: boolean
+  hoveredBackMeshName: string | null
 }
