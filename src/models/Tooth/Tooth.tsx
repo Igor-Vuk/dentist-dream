@@ -63,7 +63,19 @@ const Tooth: FC<AssetProps> = ({ model }) => {
             )
 
             if (firstElementWithName) {
-              newHoveredBackMeshName = firstElementWithName.object.name
+              /* since we have 3 nerves we combine them under the same name 
+              so they all change color and show the image on hover together */
+              /* ----------------------nerves-------------------------------- */
+              if (
+                firstElementWithName.object.name === "nerve_blue_back" ||
+                firstElementWithName.object.name === "nerve_yellow_back" ||
+                firstElementWithName.object.name === "nerve_red_back"
+              ) {
+                newHoveredBackMeshName = "nerves"
+                /* ------------------------------------------------------ */
+              } else {
+                newHoveredBackMeshName = firstElementWithName.object.name
+              }
             }
           }
         }
@@ -170,6 +182,20 @@ const Tooth: FC<AssetProps> = ({ model }) => {
           } else {
             originalMaterial = mesh.material.clone()
           }
+
+          /* since we have 3 nerves we combined them under the same name "nerves" above 
+              so they all change color and show the image on hover together */
+          /* ----------------------nerves-------------------------------- */
+          if (
+            (mesh.name === "nerve_blue_back" ||
+              mesh.name === "nerve_yellow_back" ||
+              mesh.name === "nerve_red_back") &&
+            hoveredBackMeshName === "nerves" &&
+            originalMaterial instanceof THREE.MeshStandardMaterial
+          ) {
+            originalMaterial.color.set(0xff8080)
+          }
+          /* ------------------------------------------------------------ */
 
           if (
             mesh.name === hoveredBackMeshName &&

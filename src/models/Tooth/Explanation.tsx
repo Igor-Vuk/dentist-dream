@@ -10,7 +10,7 @@ const Explanation: FC<ExplanationProps> = ({
   hoveredBackMeshName,
 }) => {
   const groupRef = useRef<THREE.Group>(null!)
-
+  console.log(hoveredBackMeshName)
   extend({ RoundedPlaneGeometry: geometry.RoundedPlaneGeometry })
 
   useFrame(() => {
@@ -43,8 +43,7 @@ const Explanation: FC<ExplanationProps> = ({
   const renderDescription = () => {
     let descriptionProps: DescriptionProps = {
       name: null,
-      imageUrl:
-        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/eqpWQAAAABJRU5ErkJggg==",
+      imageUrl: "/image/default.png",
 
       textPosition: undefined,
       imagePosition: [0, 0, 0],
@@ -64,17 +63,83 @@ const Explanation: FC<ExplanationProps> = ({
           name: "Enamel",
           imageUrl: "/image/enamel.jpg",
 
-          textPosition: [3.7, 2.8, 0],
-          imagePosition: [5, 1.5, 0.1],
-          meshBorderPosition: [5, 1.5, 0.09],
+          textPosition: [4.0, 2.8, 0],
+          imagePosition: [5.2, 1.2, 0.1],
+          meshBorderPosition: [5.2, 1.2, 0.09],
           linePoints: [
             [0, 3, 0],
             [0, 3, 0.1],
-            [3.5, 3, 0.1],
+            [3.7, 3, 0.1],
           ],
 
-          imageScale: [3, 2],
-          meshBorderGeometry: [3.1, 2.1, 0.12],
+          imageScale: [3.5, 2.5],
+          meshBorderGeometry: [3.6, 2.6, 0.12],
+
+          imageVisible: true,
+          meshBorderVisible: true,
+        })
+
+        break
+      case "dentin_back":
+        descriptionProps = updateDescriptionProps(descriptionProps, {
+          name: "Dentin",
+          imageUrl: "/image/dentin.jpg",
+
+          textPosition: [-6.5, 2.1, 0],
+          imagePosition: [-5.5, -0.3, 0.1],
+          meshBorderPosition: [-5.5, -0.3, 0.09],
+          linePoints: [
+            [0, 2.3, 0],
+            [0, 2.3, 0.1],
+            [-4.0, 2.3, 0.1],
+          ],
+
+          imageScale: [4.0, 4.0],
+          meshBorderGeometry: [4.1, 4.1, 0.12],
+
+          imageVisible: true,
+          meshBorderVisible: true,
+        })
+
+        break
+      case "pulp_back":
+        descriptionProps = updateDescriptionProps(descriptionProps, {
+          name: "Pulp",
+          imageUrl: "/image/pulp.jpg",
+
+          textPosition: [-6.2, 1.55, 0],
+          imagePosition: [-5.5, -0.9, 0.1],
+          meshBorderPosition: [-5.5, -0.9, 0.09],
+          linePoints: [
+            [0, 1.75, 0],
+            [0, 1.75, 0.1],
+            [-4.4, 1.75, 0.1],
+          ],
+
+          imageScale: [4.0, 4.0],
+          meshBorderGeometry: [4.1, 4.1, 0.12],
+
+          imageVisible: true,
+          meshBorderVisible: true,
+        })
+
+        break
+      case "nerves":
+        descriptionProps = updateDescriptionProps(descriptionProps, {
+          name: "Nerves",
+          imageUrl: "/image/nerves.jpg",
+
+          textPosition: [-6.6, 1.55, 0],
+          imagePosition: [-5.5, -1.5, 0.1],
+          meshBorderPosition: [-5.5, -1.5, 0.09],
+          linePoints: [
+            [0, 1.75, 0],
+            [0, 1.75, 0.1],
+            [-3.8, 1.75, 0.1],
+          ],
+
+          imageScale: [4.0, 5.0],
+          meshBorderGeometry: [4.1, 5.1, 0.12],
 
           imageVisible: true,
           meshBorderVisible: true,
@@ -86,17 +151,17 @@ const Explanation: FC<ExplanationProps> = ({
           name: "Bone",
           imageUrl: "/image/bone.jpg",
 
-          textPosition: [4.2, -2.2, 0],
-          imagePosition: [5, -4.1, 0.1],
-          meshBorderPosition: [5, -4.1, 0.09],
+          textPosition: [4.8, -2.2, 0],
+          imagePosition: [5.6, -4.1, 0.1],
+          meshBorderPosition: [5.6, -4.1, 0.09],
           linePoints: [
             [2, -2, 0],
             [2, -2, 0.1],
-            [4, -2, 0.1],
+            [4.6, -2, 0.1],
           ],
 
           imageScale: [4, 3],
-          meshBorderGeometry: [4.2, 3.2, 0.12],
+          meshBorderGeometry: [4.1, 3.1, 0.12],
 
           imageVisible: true,
           meshBorderVisible: true,
@@ -105,20 +170,43 @@ const Explanation: FC<ExplanationProps> = ({
         break
       case "gum_bottom_back":
         descriptionProps = updateDescriptionProps(descriptionProps, {
-          name: "Periodontal Ligament",
+          name: `
+          Periodontal
+            Ligament`,
           imageUrl: "/image/periodontal_ligament.jpg",
 
-          textPosition: [4.2, -1.2, 0],
-          imagePosition: [8, -4.1, 0.1],
-          meshBorderPosition: [8, -4.1, 0.09],
+          textPosition: [3.0, 0.4, 0],
+          imagePosition: [6.6, -4.7, 0.1],
+          meshBorderPosition: [6.6, -4.7, 0.09],
           linePoints: [
             [1.4, -1, 0],
             [1.4, -1, 0.1],
-            [4, -1, 0.1],
+            [4.3, -1, 0.1],
           ],
 
           imageScale: [4, 5],
-          meshBorderGeometry: [4.2, 5.2, 0.12],
+          meshBorderGeometry: [4.1, 5.1, 0.12],
+
+          imageVisible: true,
+          meshBorderVisible: true,
+        })
+        break
+      case "gum_top_back":
+        descriptionProps = updateDescriptionProps(descriptionProps, {
+          name: "Gum",
+          imageUrl: "/image/gum.jpg",
+
+          textPosition: [5.2, 0, 0],
+          imagePosition: [6, -1.9, 0.1],
+          meshBorderPosition: [6, -1.9, 0.09],
+          linePoints: [
+            [2.6, 0.2, 0],
+            [2.6, 0.2, 0.1],
+            [4.8, 0.2, 0.1],
+          ],
+
+          imageScale: [4, 3],
+          meshBorderGeometry: [4.1, 3.1, 0.12],
 
           imageVisible: true,
           meshBorderVisible: true,
@@ -167,7 +255,7 @@ const Explanation: FC<ExplanationProps> = ({
           receiveShadow={true}
         >
           <roundedPlaneGeometry args={descriptionProps.meshBorderGeometry} />
-          <meshStandardMaterial color="black" transparent opacity={0} />
+          <meshStandardMaterial color="#73726f" transparent opacity={0} />
         </mesh>
       </group>
     )
