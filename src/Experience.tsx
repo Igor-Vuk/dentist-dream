@@ -6,7 +6,7 @@ import { Leva } from "leva"
 
 import { CanvasControl, SceneRenderControl } from "./helpers/leva"
 
-import Camera from "./scene/Camera"
+/* import Camera from "./scene/Camera" */
 import Controls from "./scene/Controls"
 import DirectionalLight from "./scene/DirectionalLight"
 import EnvironmentMap from "./scene/EnvironmentMap"
@@ -57,8 +57,9 @@ export default function Experience() {
           toneMapping: THREE[toneMapping],
           outputColorSpace: THREE[colorSpace],
         }}
+        // style={{ touchAction: "none" }}
       >
-        <Camera />
+        {/* <Camera /> */}
         {orbit_controls && <Controls />}
         {performance_monitor && <PerformanceMonitor />}
         {directional_lights && <DirectionalLight />}

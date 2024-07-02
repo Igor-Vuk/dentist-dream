@@ -93,6 +93,24 @@ const Tooth: FC<AssetProps> = ({ model }) => {
     }
   }, [hideTooth, model.scene])
 
+  useEffect(() => {
+    // Set initial camera position and zoom
+
+    // Optionally, animate the camera to zoom in smoothly
+    const targetZoom = 1.1 // Adjust this value to achieve the desired final zoom
+    const zoomSpeed = 0.001
+
+    const animateZoom = () => {
+      if (cameraRef.current && cameraRef.current.zoom < targetZoom) {
+        cameraRef.current.zoom += zoomSpeed
+        cameraRef.current.updateProjectionMatrix()
+        requestAnimationFrame(animateZoom)
+      }
+    }
+
+    animateZoom()
+  }, [])
+
   useFrame((_, delta) => {
     if (uniformsRef.current) {
       const { uTime } = uniformsRef.current
@@ -217,26 +235,11 @@ const Tooth: FC<AssetProps> = ({ model }) => {
     })
   }
 
-  const renderPlane = () => {
-    return (
-      <mesh
-        position={[7, 0, -7]}
-        rotation={[0, -0.6, 0]}
-        receiveShadow={true}
-        castShadow={true}
-      >
-        <planeGeometry args={[40, 40]} />
-        <meshStandardMaterial />
-      </mesh>
-    )
-  }
-
   return (
     <>
       {renderBackModel()}
       {renderFrontModel}
 
-      {renderPlane()}
       <Explanation
         hideTooth={hideTooth}
         hoveredBackMeshName={hoveredBackMeshName}

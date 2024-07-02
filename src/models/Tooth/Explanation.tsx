@@ -10,7 +10,6 @@ const Explanation: FC<ExplanationProps> = ({
   hoveredBackMeshName,
 }) => {
   const groupRef = useRef<THREE.Group>(null!)
-  console.log(hoveredBackMeshName)
   extend({ RoundedPlaneGeometry: geometry.RoundedPlaneGeometry })
 
   useFrame(() => {
